@@ -1,0 +1,5 @@
+# Osirnet
+
+```
+> composer install
+```
