@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\View\View;
+
 class Controller {
 
     public static function index() {
-        return 'ola mundo';
+        View::render('home');
     }
 }
