@@ -21,23 +21,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                <?php for ($i=0, $objs = $data['query']; $i < count($objs); $i++): ?>
+                    <tr>
+                        <th scope="row"><?php echo $objs[$i]['id']; ?></th>
+                        <td><?php echo $objs[$i]['nome']; ?></td>
+                        <td><?php echo $objs[$i]['setor']; ?></td>
+                        <td><?php echo $objs[$i]['cargo']; ?></td>
+                        <td><button class="btn btn-primary">Anexar documento(s)</button></td>
+                    </tr>
+                <?php endfor; ?>
             </tbody>
         </table>
     </main>

@@ -4,9 +4,10 @@ namespace App\View;
 
 class View {
 
-    public static function render($page) {
+    public static function render($page, $result) {
         $data = array(
-            'title' => 'Osirnet'
+            'title' => 'Osirnet',
+            'query' => $result
         );
 
         include __DIR__."/pages/$page.php";
