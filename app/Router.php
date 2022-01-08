@@ -25,8 +25,9 @@ class Router {
 
     public function run() {
         $method = $_SERVER['REQUEST_METHOD'];
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = explode('/', $_SERVER['REQUEST_URI'])[1];
+        $uri = str_replace("/$uri", '',$_SERVER['REQUEST_URI']);
 
-        return call_user_func_array($this->routes[$method]['/'], []);
+        return call_user_func_array($this->routes[$method][$uri], []);
     }
 }
