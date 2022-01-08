@@ -9,13 +9,12 @@ class Model_Collaborator extends Model {
     public static function find() {
         try {
             $sql = 'SELECT * FROM colaborador';
-            $conn = Model::connect();
+            $conn = self::connect();
             $query = $conn->prepare($sql);
             $query->execute();
     
             return $query->fetchAll();
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo "Error:" . $e->getMessage();
         }
     }
