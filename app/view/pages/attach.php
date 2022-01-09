@@ -1,3 +1,12 @@
+<?php
+    function attachKey($objs, $key) {
+        for ($i=0; $i < count($objs); $i++) { 
+            if ($objs[$i]['id_tipo_documento'] === $key) return $objs[$i]['id'];
+        }
+        return null;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,18 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="app/resources/css/style.css">
+    <link rel="stylesheet" href="app/resources/css/attach.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
     <title><?php echo $data['title'] ?></title>
 </head>
 <body>
     <main>
-        <?php
-            function attachKey($objs, $key) {
-                for ($i=0; $i < count($objs); $i++) { 
-                    if ($objs[$i]['id_tipo_documento'] === $key) return $objs[$i]['id'];
-                }
-                return null;
-            }
-        ?>
+        <div class="banner">
+            <h1>Osirnet</h1>
+        </div>
+        <h3 class="title">Anexar documentos</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -52,19 +61,19 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Anexar documento</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form method="post">
                              <div class="col-md-12">
-                                <label for="validationDefault01" class="form-label">First name</label>
-                                <input type="text" class="form-control" id="validationDefault01" name="caminho_documento" required>
+                                <label for="validationDefault01" class="form-label">Caminho do documento</label>
+                                <input type="text" class="form-control" id="validationDefault01" name="caminho_documento" placeholder="Digite o caminho" required>
                             </div>
                             <input type="hidden" name="id_tipo_documento" id="id_tipo_documento">
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Submit form</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                                <button class="btn btn-primary" type="submit">Enviar</button>
                             </div>
                         </form>
                         <!-- <form class="row g-3 needs-validation" method="POST" novalidate>

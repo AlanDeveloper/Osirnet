@@ -9,6 +9,6 @@ class CollaboratorController {
 
     public static function index() {
         $result = Model_Collaborator::find();
-        View::render('home', $result);
+        View::render('collaborators', $result);
     }
 }

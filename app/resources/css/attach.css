@@ -1,0 +1,30 @@
+main {
+    align-items: initial;
+    justify-content: initial;
+    height: 100vh;
+}
+
+div.banner {
+    margin-top: 40px;
+}
+
+h3.title {
+    margin-bottom: 0;
+}
+
+.btn {
+    width: 110px;
+}
+
+@media(max-width: 600px) {
+    main {
+        width: 90%;
+    }
+
+    table th.sector,
+    table th.office,
+    table td.sector,
+    table td.office {
+        display: none;
+    }
+}

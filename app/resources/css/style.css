@@ -1,9 +1,79 @@
+:root {
+    --color-green-strong: #1e6042;
+    --color-green-hover: #448d46;
+    --color-green: #4DA24F;
+    --color-yellow: #FBC802;
+
+    --border-radius: 5px;
+}
+
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--color-yellow);
+    font-family: 'Montserrat', sans-serif;
 }
 
 main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     margin: auto;
     width: 80%;
+    height: 80vh;
+}
+
+h3.title {
+    color: var(--color-green);
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+div.banner {
+    padding: 25px 50px;
+    background-color: white;
+    opacity: .5;
+    text-align: center;
+    border-radius: var(--border-radius);
+    margin-bottom: 50px;
+}
+
+div.banner h1 {
+    color: var(--color-green);
+    font-weight: bold;
+    font-size: 3em;
+}
+
+a#big-button {
+    color: var(--color-green);
+    font-weight: bold;
+    padding: 20px;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    border: 3px solid var(--color-green);
+    font-size: 1.5em;
+}
+
+.table {
+    color: var(--color-green-strong);
+    margin-top: 30px;
+}
+
+.table>:not(caption)>*>* {
+    border: none;
+}
+
+.table tr th,
+.table tr td {
+    vertical-align: middle;
+}
+
+.btn.btn-primary {
+    border: none;
+    background-color: var(--color-green);
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--color-green-hover);
 }
