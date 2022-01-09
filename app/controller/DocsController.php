@@ -24,11 +24,13 @@ class DocsController {
             'id_collaborator' => $_POST['id_collaborator']
         ));
         header('Location: ' . BASE_URL . 'documentos');
+        exit;
     }
     
     public static function delete($id) {
         Model_Docs::delete($id);
         header('Location: ' . BASE_URL . 'documentos');
+        exit;
     }
     
     public static function update($id) {
@@ -38,5 +40,6 @@ class DocsController {
             'flag' => $_POST['flag'],
         ));
         header('Location: ' . BASE_URL . 'documentos');
+        exit;
     }
 }

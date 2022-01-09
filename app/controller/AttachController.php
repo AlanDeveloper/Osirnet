@@ -24,10 +24,12 @@ class AttachController {
             'caminho_documento' => $_POST['caminho_documento'],
         ));
         header('Location: ' . BASE_URL . 'anexar?colaborador='.$_GET['colaborador']);
+        exit;
     }
     
     public static function delete($id) {
         Model_Attach::delete($id);
         header('Location: ' . BASE_URL . 'anexar?colaborador='.$_GET['colaborador']);
+        exit;
     }
 }
