@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Closure;
 use Exception;
 
 class Router {
@@ -28,34 +27,37 @@ class Router {
         $this->routes[$method][$route] = $action;
     }
 
-    private function removeParams($route) {
-        return '/'.explode('/', $route)[1];
+    private function getMethod() {
+        // DETECTAR MÉTODO PUT E DELETE
+        if (isset($_REQUEST['_method'])) return strtoupper($_REQUEST['_method']);
+        
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    private function getRoute() {
+        // PEGAR A ROTA DO LINK
+        $url = explode('/', $_SERVER['REQUEST_URI'])[1];
+        $url = str_replace("/$url", '', $_SERVER['REQUEST_URI']);
+
+        return $url;
     }
 
     public function run() {
-        $args = [];
-        $method = $_SERVER['REQUEST_METHOD'];
-        $uri = explode('/', $_SERVER['REQUEST_URI'])[1];
-        $uri = str_replace("/$uri", '',$_SERVER['REQUEST_URI']);
-        if(isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
-            $method = 'DELETE';
-            $uri = explode('?', $uri)[0];
-            $args = [
-                'id' => filter_var($uri, FILTER_SANITIZE_NUMBER_INT)
-            ];
+        $method = self::getMethod();
+        $route = self::getRoute();
+        
+        $route = explode('?', $route)[0];
+        if($method === 'DELETE' || $method === 'PUT') {
+            $args = ['id' => filter_var($route, FILTER_SANITIZE_NUMBER_INT)];
+        } else {
+            $args = [];
         }
-        $uri = explode('?', $uri)[0];
-        if(isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'PUT') {
-            $method = 'PUT';
-            $args = [
-                'id' => filter_var($uri, FILTER_SANITIZE_NUMBER_INT)
-            ];
-        }
-        $uri = preg_replace('/\d+/u', '{id}', $uri);
+        
+        $route = preg_replace('/\d+/u', '{id}', $route);
 
-        if (!isset($this->routes[$method][$uri])) throw new Exception('Página não encontrada!');
+        if (!isset($this->routes[$method][$route])) throw new Exception('Página não encontrada!');
         if (!isset($this->routes[$method])) throw new Exception('Método não registrado!');
 
-        return call_user_func_array($this->routes[$method][$uri], $args);
+        return call_user_func_array($this->routes[$method][$route], $args);
     }
 }
