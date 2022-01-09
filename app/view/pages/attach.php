@@ -10,6 +10,14 @@
 </head>
 <body>
     <main>
+        <?php
+            function attachKey($objs, $key) {
+                for ($i=0; $i < count($objs); $i++) { 
+                    if ($objs[$i]['id_tipo_documento'] === $key) return $objs[$i]['id'];
+                }
+                return null;
+            }
+        ?>
         <table class="table">
             <thead>
                 <tr>
@@ -24,22 +32,23 @@
                         <th scope="row"><?php echo $objs[$i]['id']; ?></th>
                         <td><?php echo $objs[$i]['nome_doc']; ?></td>
                         <td><?php echo $objs[$i]['flag']; ?></td>
-                        <?php if (isset($data['query']['attachs'][0]) && array_search($objs[$i]['id'], $data['query']['attachs'][0])): ?>
+                        <?php if (isset($data['query']['attachs']) && attachKey($data['query']['attachs'], $objs[$i]['id']) !== null): ?>
                             <td>
-                                <form action="<?php echo BASE_URL.'anexar/7'; ?>">
+                                <form action="<?php echo BASE_URL.'anexar/'.attachKey($data['query']['attachs'], $objs[$i]['id']); ?>">
                                     <input type="hidden" name='_method' value="DELETE">
+                                    <input type="hidden" name="colaborador" value="<?php echo $_GET['colaborador']; ?>">
                                     <button type="submit" class="btn btn-danger text-white">Desanexar</button>
                                 </form>
                             </td>
                         <?php else: ?>
-                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Anexar</button></td>
+                            <td><button type="button" class="btn btn-primary attachForm" data-bs-toggle="modal" data-bs-target="#attachModal">Anexar</button></td>
                         <?php endif; ?>
                     </tr>
                 <?php endfor; ?>
             </tbody>
         </table>
 
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="attachModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,6 +61,7 @@
                                 <label for="validationDefault01" class="form-label">First name</label>
                                 <input type="text" class="form-control" id="validationDefault01" name="caminho_documento" required>
                             </div>
+                            <input type="hidden" name="id_tipo_documento" id="id_tipo_documento">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary" type="submit">Submit form</button>
@@ -85,6 +95,7 @@
             </div>
         </div>
     </main>
+    <script src="app/resources/js/jquery.min.js"></script>
     <script src="app/resources/js/bootstrap.min.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -107,6 +118,16 @@
             }, false)
             })
         })();
+
+        $(document).ready(function() {
+            $('.attachForm').on('click', function() {
+                $('#attachModal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                $('#id_tipo_documento').val($tr.children("th").text());
+            });
+        });
     </script>
 </body>
 </html>

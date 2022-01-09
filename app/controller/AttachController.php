@@ -20,7 +20,7 @@ class AttachController {
     public static function store() {
         Model_Attach::add(array(
             'id_colaborador' => $_GET['colaborador'],
-            'id_tipo_documento' => 7,
+            'id_tipo_documento' => $_POST["id_tipo_documento"],
             'caminho_documento' => $_POST['caminho_documento'],
         ));
         header('Location: ' . BASE_URL . 'anexar?colaborador='.$_GET['colaborador']);
