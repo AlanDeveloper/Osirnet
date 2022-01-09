@@ -32,6 +32,13 @@
                         <td><?php echo $objs[$i]['flag']; ?></td>
                         <td><?php echo $objs[$i]['data_criacao']; ?></td>
                         <td><?php echo $objs[$i]['data_modificado']; ?></td>
+                        <td><button type="button" class="btn btn-warning text-white editForm" data-bs-toggle="modal" data-bs-target="#editModal">Editar</button></td>
+                        <td>
+                            <form action="<?php echo BASE_URL.'documentos/'.$objs[$i]['id']; ?>">
+                                <input type="hidden" name='_method' value="DELETE">
+                                <button type="submit" class="btn btn-danger text-white">Deletar</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endfor; ?>
             </tbody>
@@ -53,8 +60,43 @@
                         <div class="col-md-6">
                             <label for="validationDefault04" class="form-label">Documento obrigatório</label>
                             <select class="form-select" id="validationDefault04" name="flag" required>
-                                <option value="true">Sim</option>
-                                <option value="false">Não</option>
+                                <option value="1">Sim</option>
+                                <option value="0">Não</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationDefault05" class="form-label">Zip</label>
+                            <input type="text" class="form-control" id="validationDefault05" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 needs-validation editModalForm" method="POST" action="<?php echo BASE_URL.'documentos/'; ?>" novalidate>
+                        <input type="hidden" name='_method' value="PUT">
+                        <div class="col-md-12">
+                            <label for="nome_doc" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="nome_doc" name="nome_doc" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="flag" class="form-label">Documento obrigatório</label>
+                            <select class="form-select" id="flag" name="flag" required>
+                                <option value="1">Sim</option>
+                                <option value="0">Não</option>
                             </select>
                         </div>
                         <div class="col-md-6">
@@ -72,6 +114,7 @@
         </div>
     </main>
 
+    <script src="app/resources/js/jquery.min.js"></script>
     <script src="app/resources/js/bootstrap.min.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -93,7 +136,29 @@
                 form.classList.add('was-validated')
             }, false)
             })
-        })()
+        })();
+
+        const action = $('.editModalForm').attr('action');
+
+        $(document).ready(function() {
+            $('.editForm').on('click', function() {
+                $('#editModal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                let data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data)
+                $('#nome_doc').val(data[0]);
+                $('#flag').val(data[1]);
+                $('#lname').val(data[2]);
+
+                console.log(action + $tr.children("th").text());
+                $('.editModalForm').attr('action', action + $tr.children("th").text());
+            });
+        });
     </script>
 </body>
 </html>

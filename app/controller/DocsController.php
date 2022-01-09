@@ -19,4 +19,18 @@ class DocsController {
         ));
         header('Location: ' . BASE_URL . 'documentos');
     }
+    
+    public static function delete($id) {
+        Model_Docs::delete($id);
+        header('Location: ' . BASE_URL . 'documentos');
+    }
+    
+    public static function update($id) {
+        Model_Docs::update(array(
+            'id' => $id,
+            'nome_doc' => $_POST['nome_doc'],
+            'flag' => $_POST['flag'],
+        ));
+        header('Location: ' . BASE_URL . 'documentos');
+    }
 }

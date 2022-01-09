@@ -19,5 +19,11 @@ $router->get('/documentos', function() {
 $router->post('/documentos', function() {
     return DocsController::store();
 });
+$router->delete('/documentos/{id}', function($id) {
+    return DocsController::delete($id);
+});
+$router->put('/documentos/{id}', function($id) {
+    return DocsController::update($id);
+});
 
 $router->run();
