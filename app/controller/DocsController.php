@@ -4,18 +4,24 @@ namespace App\Controller;
 
 use App\View\View;
 use App\Model\Model_Docs;
+use App\Model\Model_Collaborator;
 
 class DocsController {
 
     public static function index() {
-        $result = Model_Docs::find();
-        View::render('docs', $result);
+        $docs = Model_Docs::find();
+        $collaboretors = Model_Collaborator::find();
+        View::render('docs', array(
+            'docs' => $docs,
+            'collaborators' => $collaboretors
+        ));
     }
     
     public static function store() {
         Model_Docs::add(array(
             'nome_doc' => $_POST['nome_doc'],
             'flag' => $_POST['flag'],
+            'id_collaborator' => $_POST['id_collaborator']
         ));
         header('Location: ' . BASE_URL . 'documentos');
     }

@@ -14,8 +14,8 @@ class Model_Docs extends Model {
             $query->execute(array(
                 'nome_doc' => $obj['nome_doc'],
                 'flag' => intval($obj['flag']),
-                'id_criador' => 1,
-                'id_modificador' => 1,
+                'id_criador' => intval($obj['id_collaborator']),
+                'id_modificador' => intval($obj['id_collaborator']),
             ));
         } catch (PDOException $e) {
             echo "Error:" . $e->getMessage();

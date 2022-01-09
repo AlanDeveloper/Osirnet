@@ -25,11 +25,12 @@
                 </tr>
             </thead>
             <tbody>
-                <?php for ($i=0, $objs = $data['query']; $i < count($objs); $i++): ?>
+                <?php for ($i=0, $objs = $data['query']['docs']; $i < count($objs); $i++): ?>
                     <tr>
                         <th scope="row"><?php echo $objs[$i]['id']; ?></th>
                         <td><?php echo $objs[$i]['nome_doc']; ?></td>
                         <td><?php echo $objs[$i]['flag']; ?></td>
+                        <td style="display: none;"><?php echo $objs[$i]['id_modificador']; ?></td>
                         <td><?php echo $objs[$i]['data_criacao']; ?></td>
                         <td><?php echo $objs[$i]['data_modificado']; ?></td>
                         <td><button type="button" class="btn btn-warning text-white editForm" data-bs-toggle="modal" data-bs-target="#editModal">Editar</button></td>
@@ -65,8 +66,12 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault05" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="validationDefault05" required>
+                            <label for="validationDefault05" class="form-label">Colaboradores</label>
+                            <select class="form-select" id="validationDefault05" name="id_collaborator" required>
+                                <?php for ($i=0, $objs = $data['query']['collaborators']; $i < count($objs); $i++): ?>
+                                    <option value="<?php echo $objs[$i]['id']; ?>"><?php echo $objs[$i]['nome']; ?></option>
+                                <?php endfor; ?>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,8 +105,12 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="validationDefault05" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="validationDefault05" required>
+                            <label for="id_collaborator" class="form-label">Colaboradores</label>
+                            <select class="form-select" id="id_collaborator" name="id_collaborator" required>
+                                <?php for ($i=0, $objs = $data['query']['collaborators']; $i < count($objs); $i++): ?>
+                                    <option value="<?php echo $objs[$i]['id']; ?>"><?php echo $objs[$i]['nome']; ?></option>
+                                <?php endfor; ?>
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -150,12 +159,11 @@
                     return $(this).text();
                 }).get();
 
-                console.log(data)
                 $('#nome_doc').val(data[0]);
                 $('#flag').val(data[1]);
-                $('#lname').val(data[2]);
+                $('#id_collaborator').val(data[2]);
+                console.log(data)
 
-                console.log(action + $tr.children("th").text());
                 $('.editModalForm').attr('action', action + $tr.children("th").text());
             });
         });
