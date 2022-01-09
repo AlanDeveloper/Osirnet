@@ -44,9 +44,9 @@ class Router {
                 'id' => filter_var($uri, FILTER_SANITIZE_NUMBER_INT)
             ];
         }
+        $uri = explode('?', $uri)[0];
         if(isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'PUT') {
             $method = 'PUT';
-            $uri = explode('?', $uri)[0];
             $args = [
                 'id' => filter_var($uri, FILTER_SANITIZE_NUMBER_INT)
             ];

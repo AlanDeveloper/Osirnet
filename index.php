@@ -5,6 +5,7 @@ require __DIR__.'/app/config.php';
 
 use \App\Router;
 use \App\Controller\DocsController;
+use \App\Controller\AttachController;
 use \App\Controller\CollaboratorController;
 
 $router = new Router;
@@ -24,6 +25,16 @@ $router->delete('/documentos/{id}', function($id) {
 });
 $router->put('/documentos/{id}', function($id) {
     return DocsController::update($id);
+});
+
+$router->get('/anexar', function() {
+    return AttachController::index();
+});
+$router->post('/anexar', function() {
+    return AttachController::store();
+});
+$router->delete('/anexar/{id}', function($id) {
+    return AttachController::delete($id);
 });
 
 $router->run();

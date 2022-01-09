@@ -28,7 +28,7 @@
                         <td><?php echo $objs[$i]['nome']; ?></td>
                         <td><?php echo $objs[$i]['setor']; ?></td>
                         <td><?php echo $objs[$i]['cargo']; ?></td>
-                        <td><a class="btn btn-primary" href="#">Anexar documento(s)</a></td>
+                        <td><a class="btn btn-primary" href="<?php echo BASE_URL . 'anexar?colaborador='.$objs[$i]['id']; ?>">Anexar documento</a></td>
                     </tr>
                 <?php endfor; ?>
             </tbody>
