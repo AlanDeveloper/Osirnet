@@ -38,6 +38,11 @@
                         <td><a class="btn btn-primary" href="<?php echo BASE_URL . 'anexar?colaborador='.$objs[$i]['id']; ?>">Anexar documento</a></td>
                     </tr>
                 <?php endfor; ?>
+                <?php if (count($data['query']) === 0): ?>
+                    <tr>
+                        <td class="notFound" colspan="5">Nenhum colaborador disponível.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
     </main>

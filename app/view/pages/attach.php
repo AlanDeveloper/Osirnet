@@ -84,29 +84,6 @@
                                 <button class="btn btn-primary" type="submit">Enviar</button>
                             </div>
                         </form>
-                        <!-- <form class="row g-3 needs-validation" method="POST" novalidate>
-                            <div class="col-md-12">
-                                <label for="validationDefault01" class="form-label">First name</label>
-                                <input type="text" class="form-control" id="validationDefault01" name="nome_doc" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="validationDefault04" class="form-label">Documento obrigatório</label>
-                                <select class="form-select" id="validationDefault04" name="flag" required>
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="validationDefault05" class="form-label">Colaboradores</label>
-                                <select class="form-select" id="validationDefault05" name="id_collaborator" required>
-                                    
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Submit form</button>
-                            </div>
-                        </form> -->
                     </div>
                 </div>
             </div>
