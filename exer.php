@@ -1,80 +1,82 @@
 <?php
 
-// function rotacionar($array) {
-//     $aux = $array[0];
+function rotacionar($array) {
+    $aux = $array[0];
 
-//     for ($i=0; $i < count($array); $i++) { 
-//         $array[$i] = $array[$i + 1] ?? 0;
-//     }
-//     $array[count($array) - 1] = $aux;
-//     return $array;
-// }
+    for ($i=0; $i < count($array); $i++) { 
+        $array[$i] = $array[$i + 1] ?? 0;
+    }
+    $array[count($array) - 1] = $aux;
+    return $array;
+}
 
-// $rots = 5;
-// $array = array(1,2,3,4,5,6);
+$rots = 5;
+$array = array(1,2,3,4,5,6);
 
-// print_r($array);
+print_r($array);
 
-// for ($i=0; $i < $rots; $i++) { 
-//     $array = rotacionar($array);
-// }
+for ($i=0; $i < $rots; $i++) { 
+    $array = rotacionar($array);
+}
 
-// print_r($array);
+print_r($array);
 
 ?>
 
 <?php
 
-function pares($array) {
+function separarPorTipo($array, $tipo) {
     $aux = array();
     
     for ($i=0; $i < count($array); $i++) { 
-        if ($array[$i] % 2 === 0) array_push($aux, $array[$i]);
+        if ($array[$i] % 2 === 0 && $tipo === 'par') $aux[count($aux)] = $array[$i];
+        if ($array[$i] % 2 !== 0 && $tipo === 'impar') $aux[count($aux)] = $array[$i];
     }
     return $aux;
 }
 
-function impares($array) {
+function ordenar($array, $ordem) {
     $aux = array();
-    
-    for ($i=0; $i < count($array); $i++) { 
-        if ($array[$i] % 2 !== 0) array_push($aux, $array[$i]);
-    }
-    return $aux;
-}
-
-function ordenar($array) {
-    $aux2 = array();
 
     for ($i=0; $i < count($array); $i++) {
-        $aux = $array[$i];
+        $index = $i;
+
         for ($j=0; $j < count($array); $j++) { 
-            if ($array[$j] < $aux && !existe($aux2, $array[$j])) {
-                $aux = $array[$j];
-                print_r(existe($aux2, $array[$j]));
-            } else if(!existe($aux2, $array[$j])) {
-                $aux = $array[$j];
-            }
+            if ($array[$j] !== null && $ordem === 'asc' && ($array[$index] === null || $array[$index] > $array[$j])) $index = $j;
+            if ($array[$j] !== null && $ordem === 'desc' && ($array[$index] === null || $array[$index] < $array[$j])) $index = $j;
         }
-        array_push($aux2, $aux);
+
+        $aux[count($aux)] = $array[$index];
+        $array[$index] = null;
     }
-    return $aux2;
+    return $aux;
 }
 
-function existe($array, $numero) {
-    for ($i=0; $i < count($array); $i++) { 
-        if ($array[$i] === $numero) return true;
+function concatena($array1, $array2) {
+    $aux = array();
+    $len = count($array1) + count($array2);
+
+    for ($i=0; $i < $len; $i++) { 
+        if ($i < count($array1)) {
+            $aux[$i] = $array1[$i]; 
+        } else {
+            $aux[$i] = $array2[$i - count($array1)]; 
+        }
     }
-    return false;
+
+    return $aux;
 }
 
-$array = array(1,6,3,4,5,2);
-$par = pares($array);
-$impar = impares($array);
+$array = array(1,2,3,4,5,6,3,34,5,6,7,7,8,9,10);
 
-$par = ordenar($par);
+$par = separarPorTipo($array, 'par');
+$impar = separarPorTipo($array, 'impar');
 
-print_r($par);
-print_r($impar);
+$par = ordenar($par, 'asc');
+$impar = ordenar($impar, 'desc');
+
+$array = concatena($par, $impar);
+
+print_r($array);
 
 ?>
