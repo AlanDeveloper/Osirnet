@@ -50,6 +50,11 @@
                         </td>
                     </tr>
                 <?php endfor; ?>
+                <?php if (count($data['query']['docs']) === 0): ?>
+                    <tr>
+                        <td class="notFound" colspan="5">Nenhum documento disponível.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
 

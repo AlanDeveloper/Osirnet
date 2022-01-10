@@ -77,3 +77,7 @@ a#big-button {
 .btn.btn-primary:hover {
     background-color: var(--color-green-hover);
 }
+
+.notFound {
+    text-align: center;
+}

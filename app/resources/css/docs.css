@@ -31,4 +31,13 @@ div.banner {
     table td.dtModification {
         display: none;
     }
+
+    .navigate {
+        flex-direction: column;
+    }
+
+    .navigate > * {
+        width: 100%;
+        margin: 5px 0;
+    }
 }
