@@ -27,6 +27,9 @@
             <h1>Osirnet</h1>
         </div>
         <h3 class="title">Anexar documentos</h3>
+        <div class="navigate">
+            <a href="<?php echo BASE_URL.'colaborador'; ?>" class="btn btn-secondary">Voltar</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>

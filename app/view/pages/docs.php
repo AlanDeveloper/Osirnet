@@ -18,7 +18,10 @@
             <h1>Osirnet</h1>
         </div>
         <h3 class="title">Documentos</h3>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Adicionar documento</button>
+        <div class="navigate">
+            <a href="<?php echo BASE_URL.'colaborador'; ?>" class="btn btn-secondary">Voltar</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Adicionar documento</button>
+        </div>
         <table class="table">
             <thead>
                 <tr>
