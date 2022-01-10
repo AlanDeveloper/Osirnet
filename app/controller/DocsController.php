@@ -34,10 +34,12 @@ class DocsController {
     }
     
     public static function update($id) {
+        echo $id;
         Model_Docs::update(array(
             'id' => $id,
             'nome_doc' => $_POST['nome_doc'],
             'flag' => $_POST['flag'],
+            'id_collaborator' => $_POST['id_collaborator']
         ));
         header('Location: ' . BASE_URL . 'documentos');
         exit;

@@ -55,7 +55,7 @@ class Model_Docs extends Model {
                 'id' => $obj['id'],
                 'nome_doc' => $obj['nome_doc'],
                 'flag' => $obj['flag'],
-                'id_modificador' => 1
+                'id_modificador' => $obj['id_collaborator']
             ));
         } catch (PDOException $e) {
             echo "Error:" . $e->getMessage();
